@@ -5,7 +5,7 @@ import Tag from "@/components/ui/Tag";
 export interface TimelineRowProps {
   kind: "experience" | "research" | "project";
   title: string;
-  subtitle: string;
+  subtitle?: string;
   date: string;
   location?: string;
   description: string;

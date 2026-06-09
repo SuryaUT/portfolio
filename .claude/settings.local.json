@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem -Path \"C:\\\\Software_Dev\\\\Website\" -Force)",
+      "Bash(Select-Object Mode, Name)",
+      "Bash(python -c \"import pdfplumber; pdf = pdfplumber.open\\('Surya_Balaji_Resume.pdf'\\); [print\\(p.extract_text\\(\\)\\) for p in pdf.pages]\")",
+      "Bash(python -c \"import PyPDF2; r=PyPDF2.PdfReader\\('Surya_Balaji_Resume.pdf'\\); [print\\(p.extract_text\\(\\)\\) for p in r.pages]\")",
+      "Bash(Remove-Item *)"
+    ]
+  }
+}

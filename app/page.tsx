@@ -1,65 +1,103 @@
-import Image from "next/image";
+import HeroCopy from "@/components/hero/HeroCopy";
+import SectionHeader from "@/components/sections/SectionHeader";
+import TelemetryStrip from "@/components/sections/TelemetryStrip";
+import FadeIn from "@/components/motion/FadeIn";
+import FeaturedWorkCard from "@/components/home/FeaturedWorkCard";
+import Bio from "@/components/about/Bio";
+import Skills from "@/components/about/Skills";
+import SocialLinks from "@/components/about/SocialLinks";
+import { LinkButton } from "@/components/ui/Button";
+import { getProjects, getExperience } from "@/lib/content";
+import { ArrowRight, FileText } from "lucide-react";
+import { SITE } from "@/lib/site-config";
 
 export default function Home() {
+  const featuredProjects = getProjects().filter((p) => p.featured);
+  const featuredExperience = getExperience().filter((e) => e.featured);
+
+  const featuredWork = [
+    ...featuredExperience.map((e) => ({ kind: "experience" as const, data: e, order: e.order })),
+    ...featuredProjects.map((p) => ({ kind: "project" as const, data: p, order: p.order })),
+  ].sort((a, b) => a.order - b.order);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <main>
+      <TelemetryStrip className="" />
+
+      {/* ── Hero ─────────────────────────────────────────────────── */}
+      <section className="content-grid flex min-h-[calc(100vh-57px)] items-center py-24">
+        <HeroCopy />
+      </section>
+
+      <div className="content-grid pt-20">
+        {/* ── About ──────────────────────────────────────────────── */}
+        <FadeIn>
+          <section id="about">
+            <SectionHeader index="01" title="About" />
+            <Bio />
+          </section>
+        </FadeIn>
+
+        {/* ── Featured Work ──────────────────────────────────────── */}
+        <FadeIn delay={0.1} className="mt-20">
+          <SectionHeader index="02" title="Featured Work" />
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {featuredWork.map((item) => (
+              <FeaturedWorkCard
+                key={item.kind === "project" ? item.data.slug : item.data.company}
+                item={item}
+              />
+            ))}
+          </div>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <LinkButton href="/projects" variant="outline" size="sm">
+              All Projects
+              <ArrowRight size={12} />
+            </LinkButton>
+            <LinkButton href="/experience" variant="outline" size="sm">
+              All Work
+              <ArrowRight size={12} />
+            </LinkButton>
+          </div>
+        </FadeIn>
+
+        {/* ── Skills ─────────────────────────────────────────────── */}
+        <FadeIn delay={0.1} className="mt-20">
+          <SectionHeader index="03" title="Skills & Tools" />
+          <Skills />
+        </FadeIn>
+
+        {/* ── Find Me Online ─────────────────────────────────────── */}
+        <FadeIn delay={0.15} className="mt-20">
+          <SectionHeader index="04" title="Find Me Online" />
+          <SocialLinks />
+        </FadeIn>
+
+        <FadeIn delay={0.2} className="mt-10">
+          <LinkButton href={SITE.resumeUrl} variant="primary" external>
+            <FileText size={13} />
+            Download Resume
+          </LinkButton>
+        </FadeIn>
+
+        {/* ── Footer CTA ─────────────────────────────────────────── */}
+        <FadeIn className="my-24 border border-divider bg-surface p-10 text-center">
+          <p className="mb-3 font-jetbrains text-[0.625rem] uppercase tracking-widest text-ink-muted">
+            Open to Opportunities
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+          <h2 className="mb-2 text-2xl font-semibold text-ink">
+            Looking for a robotics intern or collaborator?
+          </h2>
+          <p className="mx-auto mb-6 max-w-md text-ink-muted">
+            I&apos;m actively looking for fall 2026 through summer 2027 internships
+            and research collaborations in robotics and autonomous systems.
+          </p>
+          <LinkButton href="/contact" variant="primary" size="md">
+            Get in Touch
+            <ArrowRight size={13} />
+          </LinkButton>
+        </FadeIn>
+      </div>
+    </main>
   );
 }

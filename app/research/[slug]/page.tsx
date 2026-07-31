@@ -5,6 +5,7 @@ import SectionHeader from "@/components/sections/SectionHeader";
 import Tag from "@/components/ui/Tag";
 import { LinkButton } from "@/components/ui/Button";
 import { getResearch, getResearchEntry } from "@/lib/content";
+import { mdxComponents } from "@/components/mdx/mdxComponents";
 import { ExternalLink, Code2, ArrowLeft } from "lucide-react";
 
 interface Props {
@@ -29,9 +30,9 @@ export default async function ResearchEntryPage({ params }: Props) {
 
   return (
     <main className="content-grid max-w-3xl py-20">
-      <LinkButton href="/research" variant="ghost" size="sm" className="mb-8">
+      <LinkButton href="/#work" variant="ghost" size="sm" className="mb-8">
         <ArrowLeft size={12} />
-        Back to Research
+        Back to Experience
       </LinkButton>
 
       <SectionHeader index="RES" title={item.lab} />
@@ -65,7 +66,7 @@ export default async function ResearchEntryPage({ params }: Props) {
       </div>
 
       <article className="prose prose-neutral max-w-none text-ink-muted [&_h2]:text-ink [&_h3]:text-ink [&_strong]:text-ink">
-        <MDXRemote source={item.content} />
+        <MDXRemote source={item.content} components={mdxComponents} />
       </article>
     </main>
   );

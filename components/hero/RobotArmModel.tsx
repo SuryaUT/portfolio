@@ -105,7 +105,7 @@ export default function RobotArm({ animate = true }: RobotArmProps) {
 
     // Gripper:
     //   X squeeze (the visible "close")
-    //   Z offset (depth wrap around fake panel plane at PANEL_Z) — compensated for
+    //   Z offset (depth wrap around fake panel plane at PANEL_Z), compensated for
     //   wrist pitch so the fingers separate in world Z, not in screen-Y.
     const grab   = smoothstep(0.42, 0.52, sp);
     const ungrab = smoothstep(0.88, 0.96, sp);
@@ -174,7 +174,7 @@ export default function RobotArm({ animate = true }: RobotArmProps) {
 
             {/* Shoulder joint */}
             <group ref={shoulderRef} position={[0, 0.85, 0]}>
-              {/* Upper arm (link 1) — slightly tapered with chamfered edges */}
+              {/* Upper arm (link 1), slightly tapered with chamfered edges */}
               <RoundedBox
                 args={[0.28, 1.5, 0.24]}
                 radius={0.04}
@@ -244,7 +244,7 @@ export default function RobotArm({ animate = true }: RobotArmProps) {
 
                 {/* Wrist joint */}
                 <group ref={wristRef} position={[0, 1.24, 0]}>
-                  {/* Wrist link — accent */}
+                  {/* Wrist link, accent */}
                   <RoundedBox
                     args={[0.18, 0.32, 0.18]}
                     radius={0.025}

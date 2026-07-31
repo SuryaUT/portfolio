@@ -1,0 +1,64 @@
+---
+title: "Autonomous Racecar & Real-Time Operating System"
+slug: "autonomous-racecar"
+tagline: "Won 1st place: custom RTOS, sensor fusion, and CAN-networked autonomous drive"
+date: "2026-01-01"
+end: "2026-05"
+featured: true
+cover: "/images/projects/autonomous-racecar/final-race.jpg"
+tech: ["C", "FreeRTOS", "CAN", "RTOS", "Sensor Fusion", "Wi-Fi"]
+hardware: ["Custom differential drive racecar", "TM4C123 (ARM Cortex-M4)", "LiDAR", "IR sensors", "IMU"]
+github: ""
+demo: ""
+order: 1
+categories: ["Robotics", "Embedded"]
+award: "1st place · 12 teams"
+role: "RTOS kernel · sensor fusion · CAN networking"
+context: "Course project"
+---
+
+## Overview
+
+A custom autonomous differential-drive racecar that won 1st place against 12 teams. The system runs on a preemptive RTOS kernel built from scratch and navigates the track using multi-rate sensor fusion of LiDAR, IR, and IMU data.
+
+## The Problem
+
+The race is a head-to-head autonomous sprint: stay on the track, hold speed and heading, and never crash, all under hard real-time deadlines. Rather than run the driving logic on a bare-metal superloop, I built a real operating system underneath it, so perception, control, and communication could each run as independent, priority-scheduled tasks with predictable timing.
+
+## What We Did
+
+<Cards>
+  <Card title="Preemptive RTOS kernel" accent>
+    Built from scratch: 8-level priority scheduling with `PendSV` context switching, blocking semaphores, and an `SVC` process loader. A FAT file system logs diagnostic data, and threads run with `<1 µs` jitter.
+  </Card>
+  <Card title="Autonomous navigation">
+    Multi-rate sensor fusion combines LiDAR, IR, and IMU as concurrent RTOS threads to track the course. A PD motor controller holds precise speed and heading through the turns.
+  </Card>
+  <Card title="Dual-board CAN communication">
+    A `CAN` bus links the two microcontrollers, splitting perception and control across boards so neither loop starves the other.
+  </Card>
+  <Card title="Wi-Fi telemetry & control">
+    A Wi-Fi server handles remote data logging and start/stop status acquisition, so runs can be triggered and reviewed without touching the car.
+  </Card>
+</Cards>
+
+## Demo
+
+<YouTube id="FJuQPQK6iTU" title="Autonomous racecar demo" />
+
+*In the heat of the race we forgot to hit record, but trust me: Tweinstein was all overtakes and inside-lane hugging. This clip runs an earlier controller that we improved a lot for the final.*
+
+## Gallery
+
+<Gallery>
+  <Figure src="/images/projects/autonomous-racecar/team.jpg" wide caption="The team on race day, with Elijah Silguero, Aditya Pulipaka, and Rayan Ahmed." />
+  <Figure src="/images/projects/autonomous-racecar/overtaking.jpg" caption="About to overtake a competitor." />
+  <Figure src="/images/projects/autonomous-racecar/death-of-tweinstein.jpg" caption="Post-race teardown. The parts had to be returned." />
+  <Figure src="/images/projects/autonomous-racecar/final-race.jpg" wide caption="The car during the final race." />
+</Gallery>
+
+## Results
+
+- 🏆 **1st place** out of 12 teams.
+- A from-scratch preemptive RTOS running the full autonomous stack (perception, control, and networking) as concurrent tasks.
+- Honest limitation: tuning the multi-rate fusion and PD gains was heavily empirical, and the control loop is calibrated to this specific track.

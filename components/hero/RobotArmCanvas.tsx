@@ -47,7 +47,7 @@ function CameraLock() {
 
 // Invisible depth-only plane. Extends downward from the panel top edge,
 // covering all the area "below" the panel in screen space.
-// renderOrder=-1 forces it to render BEFORE any arm geometry — critical, so
+// renderOrder=-1 forces it to render BEFORE any arm geometry, critical, so
 // it establishes depth values in the buffer that arm fragments behind it
 // (Z<0) will then fail the depth test against → transparent in canvas →
 // CSS3D page shows through.
@@ -106,7 +106,7 @@ function CSS3DPanelObject({ rootEl }: { rootEl: HTMLDivElement | null }) {
     }
     hostRef.current = host;
 
-    // Set initial styles via cssText once — before CSS3DRenderer takes ownership.
+    // Set initial styles via cssText once, before CSS3DRenderer takes ownership.
     // After this point we must never set cssText again; the renderer manages
     // element.style.transform and a full cssText reset would wipe it out.
     host.style.cssText = `
@@ -138,7 +138,7 @@ function CSS3DPanelObject({ rootEl }: { rootEl: HTMLDivElement | null }) {
     const onResize = () => {
       renderer.setSize(window.innerWidth, window.innerHeight);
       // Only update width; never touch cssText after CSS3DRenderer has taken
-      // ownership of the element — it manages element.style.transform directly.
+      // ownership of the element, it manages element.style.transform directly.
       host!.style.width = `${getPanelPxWidth()}px`;
     };
     window.addEventListener("resize", onResize);

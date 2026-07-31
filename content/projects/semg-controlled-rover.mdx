@@ -1,0 +1,36 @@
+---
+title: "sEMG-Controlled Rover"
+slug: "semg-controlled-rover"
+tagline: "Driving a wheeled rover wirelessly from surface-EMG muscle activation"
+date: "2025-01-01"
+end: "2025-03"
+featured: false
+cover: "/images/projects/emg-mini-projects/semg-controlled-rover.png"
+tech: ["C++", "Python", "UDP", "sEMG"]
+hardware: ["Arduino Uno R4", "Surface EMG sensors", "Wheeled rover chassis", "Motor driver"]
+github: ""
+demo: ""
+order: 5
+---
+
+## Overview
+
+A surface-EMG interface that turns muscle activation into drive commands for a wheeled rover, letting a user steer the platform hands-free.
+
+## Signal Acquisition
+
+Surface EMG is captured and conditioned on an Arduino Uno R4 through hardware bandpass filtering, rectification, and enveloping, then thresholded into discrete control signals.
+
+## Wireless Control
+
+A Direct Access Point on the Uno R4 carries low-latency UDP commands to the rover, bypassing router overhead for responsive wireless control of the motors.
+
+## Demo
+
+<YouTube id="a8DQNsBhGtY" title="sEMG-controlled rover demo" />
+
+*Steering the rover hands-free, with each muscle activation mapped to a drive command.*
+
+<YouTube id="EdKmbl0ezjk" title="Mecanum wheel test" />
+
+*Mecanum wheel test: checking omnidirectional drive before wiring the EMG control in.*

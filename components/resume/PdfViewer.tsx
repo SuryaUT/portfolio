@@ -26,7 +26,7 @@ export default function PdfViewer() {
       }
     }
 
-    // Measure once synchronously on mount — no ResizeObserver to avoid
+    // Measure once synchronously on mount, no ResizeObserver to avoid
     // the feedback loop where the PDF canvas changing height re-triggers a width update.
     measure();
 

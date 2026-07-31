@@ -7,9 +7,10 @@ export default function Bio() {
       <div className="flex flex-col gap-4">
         <div className="relative aspect-square w-full max-w-[280px] overflow-hidden border border-divider bg-surface">
           <Image
-            src="/headshot.jpg"
+            src="/images/me/headshot-square.jpg"
             alt={SITE.name}
             fill
+            sizes="280px"
             className="object-cover"
             priority
           />
@@ -33,23 +34,31 @@ export default function Bio() {
         </div>
       </div>
 
-      <div className="space-y-6 text-ink-muted leading-relaxed">
+      <div className="space-y-6 text-xl leading-relaxed text-ink/80 [&_strong]:font-semibold [&_strong]:text-ink">
         <p>
-          I&apos;m a sophomore at UT Austin pursuing a B.S. in Electrical and
-          Computer Engineering Honors and a B.B.A. in the Canfield Business
-          Honors Program (GPA: 3.96, expected May 2028).
+          I&apos;m a junior at <strong>UT Austin</strong> pursuing a B.S. in{" "}
+          <strong>Electrical &amp; Computer Engineering Honors</strong> and a B.B.A. in
+          the <strong>Canfield Business Honors Program</strong> (graduating May 2028).
         </p>
         <p>
-          My work spans the full stack of autonomous systems, from bare-metal
-          RTOS kernels and custom PCB design to ROS 2 motion planning and
-          on-device TinyML inference. I&apos;m currently an undergraduate researcher
-          at the Autonomous Mobile Robotics Laboratory, building a
-          perception-driven motion planning pipeline for a 7-DOF Kinova mobile
-          manipulator in Isaac Sim.
+          My work spans <strong>robotics</strong>, <strong>machine learning</strong>, and{" "}
+          <strong>embedded systems</strong>, centered on robotic and vehicular
+          autonomy. I also build wearable human-computer interfaces driven by{" "}
+          <strong>surface electromyography (sEMG)</strong>.
         </p>
         <p>
-          I&apos;m actively looking for fall 2026 through summer 2027 internships
-          and research collaborations in robotics and autonomous systems.
+          Recently I&apos;ve built <strong>GPU-accelerated reactive motion planning</strong>{" "}
+          for a 7-DOF manipulator at UT&apos;s Autonomous Mobile Robotics Laboratory, an{" "}
+          <strong>autonomous racecar</strong> running on a fully custom RTOS, and an{" "}
+          <strong>sEMG-controlled prosthetic arm</strong>.
+        </p>
+        <p>
+          I&apos;m always looking to learn, build, and take on hard technical problems.
+          If that sounds like your kind of thing, feel free to{" "}
+          <a href="#contact" className="text-accent hover:underline">
+            contact me
+          </a>
+          !
         </p>
       </div>
     </div>

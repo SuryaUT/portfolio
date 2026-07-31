@@ -110,7 +110,7 @@ export default function TimelineRow({
         {!isLast && <div className="mt-1 w-px flex-1 bg-divider" />}
       </div>
 
-      {/* Card — linked or plain */}
+      {/* Card, linked or plain */}
       {href ? (
         <Link href={href} className={cardClass}>
           {inner}

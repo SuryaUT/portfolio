@@ -9,11 +9,11 @@ export default function HeroCopy() {
         01 / Robotics Engineer
       </p>
 
-      <h1 className="text-5xl font-semibold leading-tight tracking-tight text-ink lg:text-6xl">
+      <h1 className="text-6xl font-bold leading-[0.95] tracking-tight text-ink sm:text-7xl lg:text-8xl">
         {SITE.name}
       </h1>
 
-      <p className="max-w-md text-lg leading-relaxed text-ink-muted">
+      <p className="max-w-xl text-xl leading-relaxed text-ink-muted">
         {SITE.shortBio}
       </p>
 

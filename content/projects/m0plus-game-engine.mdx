@@ -1,0 +1,64 @@
+---
+title: "The M0+rix: Segfaulted - Fullstack Embedded Game Console"
+slug: "m0plus-game-engine"
+tagline: "20 FPS bare-metal 3D game engine on a custom PCB with 128 KB flash and 32 KB RAM"
+date: "2025-03-01"
+end: "2025-05"
+featured: false
+cover: "/images/projects/m0+rix-game-console/pcb-in-kicad.png"
+tech: ["C", "ARM M0+ Assembly", "KiCad", "SPI", "UART", "Bare Metal"]
+hardware: ["TM4C123 (ARM Cortex-M4)", "Custom PCB", "ST7735 display", "Custom enclosure"]
+github: "https://github.com/SuryaUT/TheM0trix_Segfaulted"
+demo: ""
+order: 3
+categories: ["Embedded", "Graphics", "Hardware"]
+role: "graphics engine · PCB design · asset pipeline"
+context: "Course project · with Elijah Silguero"
+---
+
+## Overview
+
+A fully bare-metal real-time game console, hardware and software, built with Elijah Silguero. We designed the custom PCB and enclosure, then wrote a 3D game engine that renders at 20 FPS using interrupts and SPI, all within the tight constraints of 128 KB flash and 32 KB RAM.
+
+## The Problem
+
+A game console is a full stack in miniature: a board to design and fab, a display and inputs to drive, and a renderer fast enough to feel like a game, all on a microcontroller with kilobytes of memory and no operating system underneath. Rather than target a dev board, we designed our own hardware from the schematic up and wrote every layer of the engine bare metal against it.
+
+## What We Did
+
+<Cards>
+  <Card title="Custom PCB & enclosure" accent>
+    Designed a custom `PCB` in KiCad integrating graphics, audio, communication, and user input, plus a custom 3D-printed enclosure to house it.
+  </Card>
+  <Card title="Bare-metal 3D graphics engine">
+    A `20 FPS` 3D graphics engine in C, driving an `ST7735` display over `SPI` with interrupt-driven rendering, no OS, no framework.
+  </Card>
+  <Card title="Dual-board communication">
+    `UART`-based inter-board communication links a second board so additional peripherals run without starving the render loop.
+  </Card>
+  <Card title="Asset pipeline">
+    Built an asset-processing pipeline that converts image and audio data into formats fitting within `128 KB` flash and `32 KB` RAM.
+  </Card>
+</Cards>
+
+## Demo
+
+<YouTube id="fk33UKtkELA" title="M0+rix game console full demo" />
+
+*The full console running, from boot to gameplay.*
+
+## Gallery
+
+<Gallery>
+  <Figure src="/images/projects/m0+rix-game-console/both-consoles.png" wide caption="Both finished consoles." />
+  <Figure src="/images/projects/m0+rix-game-console/pcb-in-kicad.png" caption="The custom PCB laid out in KiCad." />
+  <Figure src="/images/projects/m0+rix-game-console/game-without-case.png" caption="Running with the case off, PCB exposed." />
+  <Figure src="/images/projects/m0+rix-game-console/casing-cad-design.png" caption="Enclosure CAD design." />
+  <Figure src="/images/projects/m0+rix-game-console/casing-cad-design-2.png" caption="Enclosure CAD, alternate view." />
+</Gallery>
+
+## Results
+
+- A 20 FPS 3D game engine running fully bare metal on a self-designed PCB, within 128 KB flash and 32 KB RAM.
+- End-to-end ownership of the stack: schematic and board layout, enclosure, engine, and asset pipeline.
+- Built with Elijah Silguero.

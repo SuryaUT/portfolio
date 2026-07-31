@@ -21,7 +21,7 @@ export const SITE = {
   resumeUrl: "/Surya_Balaji_Resume.pdf",
   resumeLastUpdated: "2026-06",
 
-  ogTitle: "Surya Balaji — Robotics Engineer",
+  ogTitle: "Surya Balaji · Robotics Engineer",
   ogDescription:
     "Building autonomous systems at UT Austin. Robotics, ROS 2, computer vision, and more.",
   baseUrl:

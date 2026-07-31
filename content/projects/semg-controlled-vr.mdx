@@ -1,0 +1,32 @@
+---
+title: "sEMG-Controlled VR Environment"
+slug: "semg-controlled-vr"
+tagline: "Streaming muscle-activation triggers into an interactive VR environment over a low-latency link"
+date: "2025-03-01"
+end: "2025-05"
+featured: false
+cover: "/images/projects/emg-mini-projects/semg-controlled-vr-cover.png"
+tech: ["C++", "Python", "FastAPI", "UDP", "Unity", "sEMG"]
+hardware: ["Arduino Uno R4", "Surface EMG sensors", "VR headset"]
+github: ""
+demo: ""
+order: 4
+---
+
+## Overview
+
+A surface-EMG human-system interface that lets a user drive interactions inside a VR environment through muscle activation instead of a controller. Flexing a monitored muscle group produces a trigger that the VR scene reacts to in real time.
+
+## Signal Pipeline
+
+Surface EMG is acquired and conditioned on an Arduino Uno R4 using hardware bandpass filtering, rectification, and enveloping, then reduced to discrete activation triggers via voltage thresholding.
+
+## VR Integration
+
+An asynchronous FastAPI backend streams the EMG triggers to the VR environment over UDP, using non-blocking I/O to keep interaction latency low and jitter imperceptible.
+
+## Demo
+
+<YouTube id="Sc397rCJ4YA" title="sEMG-controlled VR environment demo" />
+
+*Driving interactions in the VR scene by flexing, with no controller in hand.*

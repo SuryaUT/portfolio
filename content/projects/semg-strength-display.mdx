@@ -1,0 +1,32 @@
+---
+title: "sEMG Strength Display"
+slug: "semg-strength-display"
+tagline: "Real-time visualization of muscle-contraction strength from a surface-EMG envelope"
+date: "2024-09-01"
+end: ""
+featured: false
+cover: "/images/projects/emg-mini-projects/semg-strength-display.png"
+tech: ["C++", "Arduino", "Signal Processing", "sEMG"]
+hardware: ["Arduino Uno R4", "Surface EMG sensors", "Display"]
+github: ""
+demo: ""
+order: 6
+---
+
+## Overview
+
+A surface-EMG readout that measures how hard a muscle is contracting and displays the strength in real time, serving as an early building block for the team's later EMG-driven control projects.
+
+## Signal Processing
+
+Raw surface EMG is filtered, rectified, and enveloped on an Arduino Uno R4 to recover a smooth activation magnitude that tracks contraction strength.
+
+## Visualization
+
+The processed envelope is mapped to a live strength indicator, giving immediate visual feedback as the monitored muscle is flexed and relaxed.
+
+## Demo
+
+<YouTube id="cV7IK7TZXP0" title="Muscle activation display demo" />
+
+*The display tracking contraction strength in real time as the muscle is flexed and relaxed.*

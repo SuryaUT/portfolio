@@ -1,0 +1,83 @@
+---
+title: "sEMG Gesture Classification & Prosthetic Arm"
+slug: "emg-robotic-arm"
+tagline: "TinyML gesture recognition at 82% accuracy deployed on ESP32 for robotic arm control"
+date: "2025-12-01"
+end: ""
+featured: true
+cover: "/images/projects/emg-prosthetic-arm/full-arm.png"
+tech: ["FreeRTOS", "ESP-IDF", "TensorFlow", "scikit-learn", "C", "Python", "HDF5"]
+hardware: ["ESP32", "EMG muscle sensors", "Custom 7-DOF 3D-printed arm", "Servo motors"]
+github: "https://github.com/SuryaUT/EMG-Winter-Soldier-Arm"
+demo:
+  - label: "Live Demo · Forearm"
+    href: "https://youtu.be/6voH-t2C3i8"
+  - label: "Live Demo · Bicep"
+    href: "https://youtu.be/7o5QxAeFB_I"
+demoComingSoon: false
+order: 2
+categories: ["Robotics", "Machine Learning", "Embedded"]
+role: "signal pipeline · model training · on-device inference · hardware"
+context: "Personal project"
+---
+
+## Overview
+
+An EMG-controlled prosthetic arm that classifies hand gestures in real time using TinyML models deployed on an ESP32. The full pipeline spans signal acquisition, dataset labeling, model training, and on-device inference, driving a custom 7-DOF 3D-printed arm.
+
+## The Problem
+
+Reading intent from muscle activity is noisy and time-sensitive: the surface EMG signal is a faint, drifting waveform, and any usable control has to sample it cleanly, decide which gesture is happening, and actuate, all fast enough to feel responsive. Rather than stream raw signals to a laptop for inference, I built the whole loop, from sampling to classification, to run offline on the ESP32.
+
+## What I Did
+
+<Cards>
+  <Card title="Signal acquisition pipeline" accent>
+    `DMA`-driven non-blocking ADC sampling at `1 kHz` runs alongside an asynchronous USB transfer task. Muscle-onset detection labels the signals, and datasets are stored in `HDF5` for training.
+  </Card>
+  <Card title="TinyML gesture classification">
+    Trained `LDA` and `MLP` models on EMG signal features with scikit-learn and TensorFlow, reaching **82% accuracy across 5 hand gestures**. Both models are quantized and run offline on-device.
+  </Card>
+  <Card title="Custom 7-DOF arm">
+    Built a 7-DOF arm with custom 3D-printed CAD shims to reduce servo stress, driving each joint from the classified gesture.
+  </Card>
+  <Card title="Modified servo feedback">
+    Modified a bicep servo for continuous rotation by repurposing its internal potentiometer as an elbow-angle feedback sensor, enabling screw-driven actuation.
+  </Card>
+</Cards>
+
+## Demo
+
+<YouTube id="6voH-t2C3i8" title="Full live EMG demo: gesture classifier driving the arm" />
+
+*The complete loop: live sEMG classification driving the arm's actuation in real time.*
+
+<YouTube id="7o5QxAeFB_I" title="Live proportional EMG bicep control" />
+
+*Proportional control: bicep activation level drives the joint continuously, rather than switching between discrete classified gestures.*
+
+<YouTube id="Yr0VCsEzBKw" title="GUI walkthrough" />
+
+*Walkthrough of the GUI for signal acquisition, gesture labeling, and model training.*
+
+<YouTube id="-MC2RbcCA5s" title="Real-time gesture prediction demo" />
+
+*The model classifying hand gestures live from the sEMG signal.*
+
+<YouTube id="A6yF6Fo2Vfk" title="Manual arm movement test" />
+
+*Range-of-motion test with the joints driven by manual button presses, not EMG yet.*
+
+## Gallery
+
+<Gallery>
+  <Figure src="/images/projects/emg-prosthetic-arm/full-arm.png" wide caption="The full 7-DOF 3D-printed arm." />
+  <Figure src="/images/projects/emg-prosthetic-arm/inside-arm.png" caption="Inside the arm: servos with pulleys that pull string 'tendons' to actuate the joints." />
+  <Figure src="/images/projects/emg-prosthetic-arm/hooked-up-to-emg.png" caption="Me with the EMG muscle sensors attached to my arm." />
+</Gallery>
+
+## Results
+
+- **82% accuracy** across 5 hand gestures, with quantized models running fully offline on the ESP32.
+- A complete pipeline from `1 kHz` DMA signal acquisition through on-device TinyML inference to a custom 7-DOF actuated arm.
+- Honest limitation: accuracy holds for the trained gesture set and sensor placement; electrode drift and new users still require recalibration.

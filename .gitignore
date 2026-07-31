@@ -23,6 +23,7 @@
 # misc
 .DS_Store
 *.pem
+.claude
 
 # debug
 npm-debug.log*
@@ -39,3 +40,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Local backups of full-res original photos (not deployed)
+/image-originals
+
+# Vendor CAD kept for reference only (Kinova Gen3, Robotiq 2F-85). Never served or deployed.
+/cad

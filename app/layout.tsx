@@ -4,6 +4,8 @@ import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import TopNav from "@/components/nav/TopNav";
 import Footer from "@/components/nav/Footer";
+import SmoothScroll from "@/components/motion/SmoothScroll";
+import ScrollReset from "@/components/motion/ScrollReset";
 import { SITE } from "@/lib/site-config";
 import "./globals.css";
 
@@ -48,6 +50,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
       <head>
@@ -63,9 +66,12 @@ export default function RootLayout({
         `}} />
       </head>
       <body className="flex min-h-full flex-col">
-        <TopNav />
-        <div className="flex flex-1 flex-col pt-[57px]">{children}</div>
-        <Footer />
+        <SmoothScroll>
+          <ScrollReset />
+          <TopNav />
+          <div className="flex flex-1 flex-col pt-[57px]">{children}</div>
+          <Footer />
+        </SmoothScroll>
         <Analytics />
         <SpeedInsights />
       </body>

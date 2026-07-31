@@ -1,102 +1,143 @@
 import HeroCopy from "@/components/hero/HeroCopy";
 import SectionHeader from "@/components/sections/SectionHeader";
 import TelemetryStrip from "@/components/sections/TelemetryStrip";
-import FadeIn from "@/components/motion/FadeIn";
-import FeaturedWorkCard from "@/components/home/FeaturedWorkCard";
+import Reveal from "@/components/motion/Reveal";
+import ScrollToHash from "@/components/motion/ScrollToHash";
 import Bio from "@/components/about/Bio";
 import Skills from "@/components/about/Skills";
+import Coursework from "@/components/about/Coursework";
 import SocialLinks from "@/components/about/SocialLinks";
+import WorkList from "@/components/sections/WorkList";
+import ProjectsList from "@/components/sections/ProjectsList";
+import ContactForm from "@/components/contact/ContactForm";
 import { LinkButton } from "@/components/ui/Button";
-import { getProjects, getExperience } from "@/lib/content";
-import { ArrowRight, FileText } from "lucide-react";
+import { FileText } from "lucide-react";
 import { SITE } from "@/lib/site-config";
 
+// Each section carries an id + scroll-mt so the nav can smooth-scroll to it
+// while clearing the 57px fixed header.
+const sectionClass = "scroll-mt-[72px]";
+
 export default function Home() {
-  const featuredProjects = getProjects().filter((p) => p.featured);
-  const featuredExperience = getExperience().filter((e) => e.featured);
-
-  const featuredWork = [
-    ...featuredExperience.map((e) => ({ kind: "experience" as const, data: e, order: e.order })),
-    ...featuredProjects.map((p) => ({ kind: "project" as const, data: p, order: p.order })),
-  ].sort((a, b) => a.order - b.order);
-
   return (
     <main>
+      <ScrollToHash />
       <TelemetryStrip className="" />
 
       {/* ── Hero ─────────────────────────────────────────────────── */}
-      <section className="content-grid flex min-h-[calc(100vh-57px)] items-center py-24">
+      <section
+        id="top"
+        className="content-grid flex min-h-[calc(100vh-57px)] items-center py-24"
+      >
         <HeroCopy />
       </section>
 
-      <div className="content-grid pt-20">
+      <div className="content-grid pb-24 pt-8">
         {/* ── About ──────────────────────────────────────────────── */}
-        <FadeIn>
-          <section id="about">
-            <SectionHeader index="01" title="About" />
+        <section id="about" className={sectionClass}>
+          <Reveal>
+            <SectionHeader index="01" title="About" kicker="Profile" />
             <Bio />
-          </section>
-        </FadeIn>
-
-        {/* ── Featured Work ──────────────────────────────────────── */}
-        <FadeIn delay={0.1} className="mt-20">
-          <SectionHeader index="02" title="Featured Work" />
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {featuredWork.map((item) => (
-              <FeaturedWorkCard
-                key={item.kind === "project" ? item.data.slug : item.data.company}
-                item={item}
-              />
-            ))}
-          </div>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <LinkButton href="/projects" variant="outline" size="sm">
-              All Projects
-              <ArrowRight size={12} />
-            </LinkButton>
-            <LinkButton href="/experience" variant="outline" size="sm">
-              All Work
-              <ArrowRight size={12} />
-            </LinkButton>
-          </div>
-        </FadeIn>
+          </Reveal>
+        </section>
 
         {/* ── Skills ─────────────────────────────────────────────── */}
-        <FadeIn delay={0.1} className="mt-20">
-          <SectionHeader index="03" title="Skills & Tools" />
-          <Skills />
-        </FadeIn>
+        <section id="skills" className={`${sectionClass} mt-32`}>
+          <Reveal>
+            <SectionHeader
+              index="02"
+              title="Skills"
+              kicker="Toolkit"
+              description="The languages, platforms, and tools I build with."
+            />
+          </Reveal>
+          <Reveal>
+            <Skills />
+          </Reveal>
+        </section>
 
-        {/* ── Find Me Online ─────────────────────────────────────── */}
-        <FadeIn delay={0.15} className="mt-20">
-          <SectionHeader index="04" title="Find Me Online" />
-          <SocialLinks />
-        </FadeIn>
+        {/* ── Work ───────────────────────────────────────────────── */}
+        <section id="work" className={`${sectionClass} mt-32`}>
+          <Reveal>
+            <SectionHeader
+              index="03"
+              title="Experience"
+              kicker="Timeline"
+              description="Research positions, teaching, and student organizations."
+            />
+          </Reveal>
+          <WorkList />
+        </section>
 
-        <FadeIn delay={0.2} className="mt-10">
-          <LinkButton href={SITE.resumeUrl} variant="primary" external>
-            <FileText size={13} />
-            Download Resume
-          </LinkButton>
-        </FadeIn>
+        {/* ── Projects ───────────────────────────────────────────── */}
+        <section id="projects" className={`${sectionClass} mt-32`}>
+          <Reveal>
+            <SectionHeader
+              index="04"
+              title="Projects"
+              kicker="Selected Work"
+              description="Autonomous systems, perception, locomotion, and embedded control."
+            />
+          </Reveal>
+          <ProjectsList />
+        </section>
 
-        {/* ── Footer CTA ─────────────────────────────────────────── */}
-        <FadeIn className="my-24 border border-divider bg-surface p-10 text-center">
-          <p className="mb-3 font-jetbrains text-[0.625rem] uppercase tracking-widest text-ink-muted">
-            Open to Opportunities
-          </p>
-          <h2 className="mb-2 text-2xl font-semibold text-ink">
-            Looking for a robotics intern or collaborator?
-          </h2>
-          <p className="mx-auto mb-6 max-w-md text-ink-muted">
-            I&apos;m actively looking for fall 2026 through summer 2027 internships
-            and research collaborations in robotics and autonomous systems.
-          </p>
-          <LinkButton href="/contact" variant="primary" size="md">
-            Get in Touch
-            <ArrowRight size={13} />
-          </LinkButton>
-        </FadeIn>
+        {/* ── Coursework ─────────────────────────────────────────── */}
+        <section id="coursework" className={`${sectionClass} mt-32`}>
+          <Reveal>
+            <SectionHeader
+              index="05"
+              title="Coursework"
+              kicker="Academics"
+              description="Selected classes across ECE and the Canfield Business Honors Program."
+            />
+          </Reveal>
+          <Reveal>
+            <Coursework />
+          </Reveal>
+        </section>
+
+        {/* ── Contact ────────────────────────────────────────────── */}
+        <section id="contact" className={`${sectionClass} mt-32`}>
+          <Reveal>
+            <SectionHeader index="06" title="Contact" kicker="Get in Touch" />
+            <div className="grid grid-cols-1 gap-16 lg:grid-cols-[1fr_420px]">
+              <div>
+                <h2 className="mb-3 text-3xl font-semibold text-ink">
+                  Let&apos;s build something.
+                </h2>
+                <p className="mb-8 max-w-md leading-relaxed text-ink-muted">
+                  I&apos;m actively looking for fall 2026 through summer 2027 robotics
+                  internships and research collaborations. If you&apos;re working on
+                  autonomous systems, manipulation, or mobile robotics, I&apos;d love
+                  to chat.
+                </p>
+                <div className="mb-8 space-y-2">
+                  <p className="font-jetbrains text-[0.625rem] uppercase tracking-widest text-ink-muted">
+                    Email
+                  </p>
+                  <a
+                    href={`mailto:${SITE.email}`}
+                    className="text-ink transition-colors hover:text-accent"
+                  >
+                    {SITE.email}
+                  </a>
+                </div>
+                <SocialLinks />
+                <div className="mt-8">
+                  <LinkButton href={SITE.resumeUrl} variant="outline" size="sm" external>
+                    <FileText size={13} />
+                    Download Resume
+                  </LinkButton>
+                </div>
+              </div>
+
+              <div>
+                <ContactForm />
+              </div>
+            </div>
+          </Reveal>
+        </section>
       </div>
     </main>
   );

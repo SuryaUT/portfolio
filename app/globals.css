@@ -48,9 +48,9 @@ html.dark {
   box-sizing: border-box;
 }
 
-html {
-  scroll-behavior: smooth;
-}
+/* Smooth scrolling is handled by Lenis (see SmoothScroll.tsx). Keep the native
+   behavior at `auto` so it doesn't fight Lenis's programmatic/anchor scrolling;
+   reduced-motion users (Lenis disabled) then get accessible instant jumps. */
 
 body {
   background-color: var(--color-bg);
